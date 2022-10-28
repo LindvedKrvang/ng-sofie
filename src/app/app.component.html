@@ -1,1 +1,10 @@
+<mat-toolbar color="primary">
+  <span (click)="navigateHome()">{{title}}</span>
+  <span class="toolbar-entry">
+    <button mat-icon-button (click)="navigateToDevices()">
+      <mat-icon>devices</mat-icon>
+      Devices
+    </button>
+  </span>
+</mat-toolbar>
 <router-outlet></router-outlet>
