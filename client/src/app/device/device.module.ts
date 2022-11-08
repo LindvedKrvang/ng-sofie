@@ -8,6 +8,9 @@ import { DeviceOverviewComponent } from './components/device-overview/device-ove
   ],
   imports: [
     CommonModule
+  ],
+  providers: [
   ]
+
 })
 export class DeviceModule { }
