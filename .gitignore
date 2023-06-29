@@ -32,13 +32,13 @@ client/node_modules
 .history/*
 
 # Miscellaneous
-client/.angular/cache
-client/sass-cache/
-client/connect.lock
-client/coverage
-client/libpeerconnection.log
-client/testem.log
-client/typings
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
 
 # System files
 .DS_Store
