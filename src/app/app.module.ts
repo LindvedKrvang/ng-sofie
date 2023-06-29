@@ -7,6 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
+import { HttpClientModule } from '@angular/common/http'
+import { RundownModule } from './rundown/rundown.module'
+import { SharedModule } from './shared/shared.module'
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { MatButtonModule } from '@angular/material/button'
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule,
+    RundownModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

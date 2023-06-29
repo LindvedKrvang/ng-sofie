@@ -17,7 +17,7 @@ export class AppComponent {
     this.router.navigate([Paths.HOME])
   }
 
-  navigateToDevices(): void {
-    this.router.navigate([Paths.DEVICES])
+  navigateToRundown(): void {
+    this.router.navigate([Paths.RUNDOWNS])
   }
 }

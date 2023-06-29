@@ -1,19 +1,22 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { DeviceOverviewComponent } from './device/components/device-overview/device-overview.component'
-import { HomeOverviewComponent } from './home/components/home-overview/home-overview.component'
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
+import { RundownOverviewComponent } from './rundown/components/rundown-overview/rundown-overview.component'
+import { RundownComponent } from './rundown/components/rundown/rundown.component'
 
 export enum Paths {
   HOME = '',
-  DEVICES = 'devices'
+  RUNDOWNS = 'rundowns'
 }
 
 const routes: Routes = [
   {
-    path: Paths.HOME, component: HomeOverviewComponent
+    path: Paths.HOME, component: RundownOverviewComponent
   },
   {
-    path: Paths.DEVICES, component: DeviceOverviewComponent
+    path: Paths.RUNDOWNS, component: RundownOverviewComponent
+  },
+  {
+    path: `${Paths.RUNDOWNS}/:rundownId`, component: RundownComponent
   }
 ];
 

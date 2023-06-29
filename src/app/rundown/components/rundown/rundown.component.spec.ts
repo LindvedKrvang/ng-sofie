@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeviceOverviewComponent } from './device-overview.component';
+import { RundownComponent } from './rundown.component';
 
-describe('DeviceOverviewComponent', () => {
-  let component: DeviceOverviewComponent;
-  let fixture: ComponentFixture<DeviceOverviewComponent>;
+describe('RundownComponent', () => {
+  let component: RundownComponent;
+  let fixture: ComponentFixture<RundownComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DeviceOverviewComponent ]
+      declarations: [ RundownComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DeviceOverviewComponent);
+    fixture = TestBed.createComponent(RundownComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

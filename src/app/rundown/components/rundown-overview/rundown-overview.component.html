@@ -1,0 +1,6 @@
+<div>
+  <span class="title">Rundowns:</span>
+  <div *ngFor="let rundown of rundowns" (click)="navigateToRundown(rundown)" class="rundown">
+    {{rundown.name}}
+  </div>
+</div>
