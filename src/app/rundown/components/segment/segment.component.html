@@ -9,6 +9,6 @@
     NEXT
   </span>
   <div class="parts">
-    <sofie-part *ngFor="let part of segment.parts" [part]="part" (partSelectedAsNextEvent)="emitSetNextEvent($event)"></sofie-part>
+    <sofie-part *ngFor="let part of segment.parts" [part]="part" [isRundownActive]="isRundownActive" (partSelectedAsNextEvent)="emitSetNextEvent($event)"></sofie-part>
   </div>
 </div>

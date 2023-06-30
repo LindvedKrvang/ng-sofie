@@ -6,5 +6,5 @@
     NEXT
   </span>
   {{part.id}}
-  <button *ngIf="!part.isNext && !part.isOnAir" (click)="setPartAsNext()">Set Part as Next</button>
+  <button *ngIf="isRundownActive && !part.isNext && !part.isOnAir" (click)="setPartAsNext()">Set Part as Next</button>
 </div>

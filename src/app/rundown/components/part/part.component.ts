@@ -9,6 +9,9 @@ import { Part } from '../../../shared/model/part'
 export class PartComponent implements OnInit {
 
   @Input()
+  public isRundownActive: boolean
+
+  @Input()
   public part: Part
 
   @Output()

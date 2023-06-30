@@ -9,6 +9,9 @@ import { Segment } from '../../../shared/model/segment'
 export class SegmentComponent implements OnInit {
 
   @Input()
+  public isRundownActive: boolean
+
+  @Input()
   public segment: Segment
 
   @Output()

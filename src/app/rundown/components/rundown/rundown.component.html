@@ -5,5 +5,5 @@
   <button *ngIf="rundown?.isActive" (click)="takeNext()">Take Next</button>
 </div>
 <div class="segments">
-  <sofie-segment *ngFor="let segment of rundown?.segments" [segment]="segment" (setNextEvent)="setNext($event)"></sofie-segment>
+  <sofie-segment *ngFor="let segment of rundown?.segments" [segment]="segment" [isRundownActive]="rundown?.isActive ?? false" (setNextEvent)="setNext($event)"></sofie-segment>
 </div>
