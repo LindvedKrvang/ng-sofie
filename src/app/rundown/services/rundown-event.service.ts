@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-const WEBSOCKET_URL: string = 'ws://localhost:3006/?token=abc123'
+const WEBSOCKET_URL: string = 'ws://localhost:3006/'
 
 @Injectable()
 export class RundownEventService {
