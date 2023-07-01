@@ -3,8 +3,12 @@ import { Rundown } from '../../../shared/model/rundown'
 import { ActivatedRoute } from '@angular/router'
 import { RundownService } from '../../services/rundown.service'
 import { RundownEventService } from '../../services/rundown-event.service'
-import { RundownEvent } from '../../../shared/model/rundown-event'
+import { AdLibPieceInsertedRundownEvent, RundownEvent } from '../../../shared/model/rundown-event'
 import { RundownEventType } from '../../../shared/model/rundown-event-type'
+import { Segment } from '../../../shared/model/segment'
+import { Part } from '../../../shared/model/part'
+import { Identifier } from '../../../shared/model/identifier'
+import { AdLibPieceService } from '../../services/ad-lib-piece.service'
 
 @Component({
   selector: 'sofie-rundown',
@@ -12,14 +16,17 @@ import { RundownEventType } from '../../../shared/model/rundown-event-type'
   styleUrls: ['./rundown.component.scss']
 })
 export class RundownComponent implements OnInit, OnDestroy {
+
   public rundown?: Rundown
+  public adLibPieceIdentifiers: Identifier[] = []
 
   private webSocket: WebSocket
 
   constructor(
     private route: ActivatedRoute,
     private rundownService: RundownService,
-    private rundownEventService: RundownEventService
+    private rundownEventService: RundownEventService,
+    private adLibPieceService: AdLibPieceService
   ) { }
 
   ngOnInit(): void {
@@ -28,10 +35,27 @@ export class RundownComponent implements OnInit, OnDestroy {
       console.log('No rundownId found. Can\'t fetch Rundown')
       return
     }
+
+    this.fetchRundown(rundownId)
+    this.fetchAdLibPieceIdentifiers(rundownId)
+    this.startListeningForRundownEvent(rundownId)
+
+    window.onbeforeunload = () => this.ngOnDestroy()
+  }
+
+  private fetchRundown(rundownId: string): void {
     this.rundownService.fetchRundown(rundownId).subscribe(rundown => {
       this.rundown = rundown
     })
+  }
 
+  private fetchAdLibPieceIdentifiers(rundownId: string): void {
+    this.adLibPieceService.fetchAdLibPieceIdentifiers(rundownId).subscribe((identifiers: Identifier[]) => {
+      this.adLibPieceIdentifiers = identifiers
+    })
+  }
+
+  private startListeningForRundownEvent(rundownId: string): void {
     this.webSocket = this.rundownEventService.listenForRundownEvents(rundownId, (rundownEvent: RundownEvent) => {
       switch (rundownEvent.type) {
         case RundownEventType.ACTIVATE: {
@@ -50,10 +74,25 @@ export class RundownComponent implements OnInit, OnDestroy {
           this.rundown?.setNext(rundownEvent)
           break
         }
+        case RundownEventType.AD_LIB_PIECE_INSERTED: {
+          const adLibPieceInsertedEvent: AdLibPieceInsertedRundownEvent = rundownEvent as AdLibPieceInsertedRundownEvent
+          this.insertAdLibPiece(adLibPieceInsertedEvent)
+          break
+        }
       }
     })
+  }
 
-    window.onbeforeunload = () => this.ngOnDestroy()
+  private insertAdLibPiece(event: AdLibPieceInsertedRundownEvent): void {
+    const segment: Segment | undefined = this.rundown?.segments.find(segment => segment.id === event.segmentId)
+    if (!segment) {
+      return
+    }
+    const part: Part | undefined = segment.parts.find(part => part.id === event.partId)
+    if (!part) {
+      return
+    }
+    part.insetAdLibPiece(event.adLibPiece)
   }
 
   ngOnDestroy(): void {

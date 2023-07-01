@@ -9,6 +9,10 @@ import { PartComponent } from './components/part/part.component'
 import { RundownComponent } from './components/rundown/rundown.component'
 import { RundownEventService } from './services/rundown-event.service'
 import { MatButtonToggleModule } from '@angular/material/button-toggle'
+import { PieceComponent } from './components/piece/piece.component'
+import { AdLibPieceComponent } from './components/ad-lib-piece/ad-lib-piece.component';
+import { AdLibPieceIdentifierComponent } from './components/ad-lib-piece-identifier/ad-lib-piece-identifier.component'
+import { AdLibPieceService } from './services/ad-lib-piece.service'
 
 
 @NgModule({
@@ -16,7 +20,10 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle'
     RundownOverviewComponent,
     SegmentComponent,
     PartComponent,
-    RundownComponent
+    RundownComponent,
+    PieceComponent,
+    AdLibPieceComponent,
+    AdLibPieceIdentifierComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +33,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle'
   ],
   providers: [
     RundownService,
-    RundownEventService
+    RundownEventService,
+    AdLibPieceService
   ]
 })
 export class RundownModule { }

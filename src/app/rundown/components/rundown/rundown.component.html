@@ -1,9 +1,18 @@
 <div class="title">{{rundown?.name}}</div>
-<div>
-  <button *ngIf="rundown?.isActive" (click)="deactivateRundown()">Deactivate Rundown</button>
-  <button *ngIf="!rundown?.isActive" (click)="activateRundown()">Activate Rundown</button>
-  <button *ngIf="rundown?.isActive" (click)="takeNext()">Take Next</button>
+<div class="container">
+  <div>
+    <div>
+      <button *ngIf="rundown?.isActive" (click)="deactivateRundown()">Deactivate Rundown</button>
+      <button *ngIf="!rundown?.isActive" (click)="activateRundown()">Activate Rundown</button>
+      <button *ngIf="rundown?.isActive" (click)="takeNext()">Take Next</button>
+    </div>
+    <div class="segments">
+      <sofie-segment *ngFor="let segment of rundown?.segments" [segment]="segment" [isRundownActive]="rundown?.isActive ?? false" (setNextEvent)="setNext($event)"></sofie-segment>
+    </div>
+  </div>
+  <div class="ad-lib-pieces">
+    <span class="ad-lib-title">Adlib Pieces</span>
+    <sofie-ad-lib-piece-identifier *ngFor="let identifier of adLibPieceIdentifiers" [adLibPieceIdentifier]="identifier" [rundownId]="rundown?.id ?? ''"></sofie-ad-lib-piece-identifier>
+  </div>
 </div>
-<div class="segments">
-  <sofie-segment *ngFor="let segment of rundown?.segments" [segment]="segment" [isRundownActive]="rundown?.isActive ?? false" (setNextEvent)="setNext($event)"></sofie-segment>
-</div>
+

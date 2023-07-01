@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import { Rundown } from '../../shared/model/rundown'
 import { HttpClient } from '@angular/common/http'
 import { map, Observable } from 'rxjs'

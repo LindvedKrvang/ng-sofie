@@ -1,4 +1,5 @@
 import { Piece } from './piece'
+import { AdLibPiece } from './ad-lib-piece'
 
 export interface PartInterface {
   id: string
@@ -14,6 +15,7 @@ export class Part {
   isOnAir: boolean
   isNext: boolean
   pieces: Piece[]
+  adLibPieces: AdLibPiece[]
 
   constructor(part: PartInterface) {
     this.id = part.id
@@ -21,6 +23,7 @@ export class Part {
     this.isOnAir = part.isOnAir
     this.isNext = part.isNext
     this.pieces = part.pieces
+    this.adLibPieces = []
   }
 
   putOnAir(): void {
@@ -37,5 +40,9 @@ export class Part {
 
   setAsNextPart(): void {
     this.isNext = true
+  }
+
+  insetAdLibPiece(adLibPiece: AdLibPiece): void {
+    this.adLibPieces.push(adLibPiece)
   }
 }
