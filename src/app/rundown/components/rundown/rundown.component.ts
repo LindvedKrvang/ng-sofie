@@ -69,6 +69,10 @@ export class RundownComponent implements OnInit, OnDestroy {
           this.rundown?.deactivate()
           break
         }
+        case RundownEventType.RESET: {
+          this.fetchRundown(rundownEvent.rundownId)
+          break
+        }
         case RundownEventType.TAKE: {
           this.rundown?.takeNext(rundownEvent)
           break
@@ -85,6 +89,7 @@ export class RundownComponent implements OnInit, OnDestroy {
         case RundownEventType.INFINITE_RUNDOWN_PIECE_ADDED: {
           const infiniteRundownPieceAddedEvent: InfiniteRundownPieceAddedEvent = rundownEvent as InfiniteRundownPieceAddedEvent
           this.addInfiniteRundownPiece(infiniteRundownPieceAddedEvent)
+          break;
         }
       }
     })
@@ -122,6 +127,13 @@ export class RundownComponent implements OnInit, OnDestroy {
       return
     }
     this.rundownService.deactivate(this.rundown?.id).subscribe()
+  }
+
+  public resetRundown(): void {
+    if (!this.rundown?.id) {
+      return
+    }
+    this.rundownService.reset(this.rundown.id).subscribe()
   }
 
   public takeNext(): void {

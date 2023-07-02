@@ -43,6 +43,13 @@ export class RundownService {
       )
   }
 
+  public reset(rundownId: string): Observable<void> {
+    return this.http.put<void>(`${RUNDOWN_URL}/${rundownId}/reset`, null)
+      .pipe(
+        catchError((err) => this.httpErrorService.catchError(err))
+      )
+  }
+
   public takeNext(rundownId: string): Observable<void> {
     return this.http.put<void>(`${RUNDOWN_URL}/${rundownId}/takeNext`, null)
       .pipe(
