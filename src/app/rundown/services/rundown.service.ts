@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Rundown } from '../../shared/model/rundown'
+import { Rundown, RundownInterface } from '../../shared/model/rundown'
 import { HttpClient } from '@angular/common/http'
 import { catchError, map, Observable } from 'rxjs'
 import { Identifier } from '../../shared/model/identifier'
@@ -16,8 +16,8 @@ export class RundownService {
   ) { }
 
   fetchRundown(rundownId: string): Observable<Rundown> {
-    return this.http.get<Rundown>(`${RUNDOWN_URL}/${rundownId}`).pipe(
-      map(value => new Rundown(value)),
+    return this.http.get<RundownInterface>(`${RUNDOWN_URL}/${rundownId}`).pipe(
+      map((value: RundownInterface) => new Rundown(value)),
       catchError((error) => this.httpErrorService.catchError(error))
     )
   }

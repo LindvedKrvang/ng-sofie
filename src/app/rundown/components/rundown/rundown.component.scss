@@ -17,8 +17,11 @@ sofie-segment {
   font-size: 2em;
 }
 
-.ad-lib-title {
-  font-size: 1.5em;
+.title, .subtitle {
   display: flex;
   justify-content: center;
+}
+
+.subtitle {
+  font-size: 1.5em;
 }

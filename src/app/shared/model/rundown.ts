@@ -1,11 +1,13 @@
 import { Segment, SegmentInterface } from './segment'
 import { RundownEvent } from './rundown-event'
+import { Piece } from './piece'
 
 export interface RundownInterface {
   id: string
   name: string
   isActive: boolean
   segments: SegmentInterface[]
+  infinitePieces: Piece[]
 }
 
 export class Rundown {
@@ -14,15 +16,18 @@ export class Rundown {
   isActive: boolean
   segments: Segment[]
 
+  private infinitePieces: Map<string, Piece> = new Map()
+
   constructor(rundown: RundownInterface) {
     this.id = rundown.id
     this.name = rundown.name
     this.isActive = rundown.isActive
     this.segments = rundown.segments.map(segment => new Segment(segment))
+    rundown.infinitePieces.forEach(piece => this.infinitePieces.set(piece.layer, piece))
   }
 
 
-  activate(activateEvent: RundownEvent): void {
+  public activate(activateEvent: RundownEvent): void {
     this.isActive = true
     const segment: Segment | undefined = this.segments.find(segment => segment.id === activateEvent.segmentId)
     if (!segment) {
@@ -32,7 +37,7 @@ export class Rundown {
     segment.putOnAir(activateEvent)
   }
 
-  deactivate(): void {
+  public deactivate(): void {
     this.isActive = false
     this.takeAllSegmentsOffAir()
   }
@@ -42,7 +47,7 @@ export class Rundown {
     this.segments.find(segment => segment.isNext)?.removeAsNextSegment()
   }
 
-  takeNext(takeEvent: RundownEvent): void {
+  public takeNext(takeEvent: RundownEvent): void {
     this.takeAllSegmentsOffAir()
     const segmentToComeOnAir: Segment | undefined = this.segments.find(segment => segment.id === takeEvent.segmentId)
     if (!segmentToComeOnAir) {
@@ -52,8 +57,16 @@ export class Rundown {
     segmentToComeOnAir.putOnAir(takeEvent)
   }
 
-  setNext(setNextEvent: RundownEvent): void {
+  public setNext(setNextEvent: RundownEvent): void {
     this.segments.find(segment => segment.isNext)?.removeAsNextSegment()
     this.segments.find(segment => segment.id === setNextEvent.segmentId)?.setAsNextSegment(setNextEvent)
+  }
+
+  public addInfinitePiece(infinitePiece: Piece): void {
+    this.infinitePieces.set(infinitePiece.layer, infinitePiece)
+  }
+
+  public getInfinitePieceIdentifiers(): Piece[] {
+    return Array.from(this.infinitePieces.values())
   }
 }

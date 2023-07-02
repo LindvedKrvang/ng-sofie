@@ -3,7 +3,10 @@ import { Rundown } from '../../../shared/model/rundown'
 import { ActivatedRoute } from '@angular/router'
 import { RundownService } from '../../services/rundown.service'
 import { RundownEventService } from '../../services/rundown-event.service'
-import { AdLibPieceInsertedRundownEvent, RundownEvent } from '../../../shared/model/rundown-event'
+import {
+  AdLibPieceInsertedRundownEvent, InfiniteRundownPieceAddedEvent,
+  RundownEvent
+} from '../../../shared/model/rundown-event'
 import { RundownEventType } from '../../../shared/model/rundown-event-type'
 import { Segment } from '../../../shared/model/segment'
 import { Part } from '../../../shared/model/part'
@@ -79,6 +82,10 @@ export class RundownComponent implements OnInit, OnDestroy {
           this.insertAdLibPiece(adLibPieceInsertedEvent)
           break
         }
+        case RundownEventType.INFINITE_RUNDOWN_PIECE_ADDED: {
+          const infiniteRundownPieceAddedEvent: InfiniteRundownPieceAddedEvent = rundownEvent as InfiniteRundownPieceAddedEvent
+          this.addInfiniteRundownPiece(infiniteRundownPieceAddedEvent)
+        }
       }
     })
   }
@@ -95,32 +102,36 @@ export class RundownComponent implements OnInit, OnDestroy {
     part.insetAdLibPiece(event.adLibPiece)
   }
 
-  ngOnDestroy(): void {
+  private addInfiniteRundownPiece(event: InfiniteRundownPieceAddedEvent): void {
+    this.rundown?.addInfinitePiece(event.infinitePiece)
+  }
+
+  public ngOnDestroy(): void {
     this.webSocket.close()
   }
 
-  activateRundown(): void {
+  public activateRundown(): void {
     if (!this.rundown?.id) {
       return
     }
     this.rundownService.activate(this.rundown?.id).subscribe()
   }
 
-  deactivateRundown(): void {
+  public deactivateRundown(): void {
     if (!this.rundown?.id) {
       return
     }
     this.rundownService.deactivate(this.rundown?.id).subscribe()
   }
 
-  takeNext(): void {
+  public takeNext(): void {
     if (!this.rundown?.id) {
       return
     }
     this.rundownService.takeNext(this.rundown?.id).subscribe()
   }
 
-  setNext(event: { segmentId: string, partId: string }): void {
+  public setNext(event: { segmentId: string, partId: string }): void {
     if (!this.rundown?.id) {
       return
     }
