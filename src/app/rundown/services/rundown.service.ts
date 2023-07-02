@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { Rundown } from '../../shared/model/rundown'
 import { HttpClient } from '@angular/common/http'
 import { map, Observable } from 'rxjs'
+import { Identifier } from '../../shared/model/identifier'
 
 const RUNDOWN_URL: string = 'http://localhost:3005/api/rundowns'
 
@@ -16,10 +17,8 @@ export class RundownService {
     )
   }
 
-  fetchRundowns(): Observable<Rundown[]> {
-    return this.http.get<Rundown[]>(RUNDOWN_URL).pipe(
-      map(values => values.map(value => new Rundown(value)))
-    )
+  fetchRundownIdentifiers(): Observable<Identifier[]> {
+    return this.http.get<Identifier[]>(`${RUNDOWN_URL}/identifiers`)
   }
 
   activate(rundownId: string): Observable<void> {

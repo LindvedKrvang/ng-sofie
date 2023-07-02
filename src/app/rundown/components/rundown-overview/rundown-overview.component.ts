@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { RundownService } from '../../services/rundown.service'
-import { Rundown } from '../../../shared/model/rundown'
 import { Paths } from '../../../app-routing.module'
+import { Identifier } from '../../../shared/model/identifier'
 
 @Component({
   selector: 'sofie-rundown-overview',
@@ -11,7 +11,7 @@ import { Paths } from '../../../app-routing.module'
 })
 export class RundownOverviewComponent implements OnInit {
 
-  public rundowns: Rundown[]
+  public rundownIdentifiers: Identifier[]
 
   constructor(
     private route: ActivatedRoute,
@@ -20,12 +20,12 @@ export class RundownOverviewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.rundownService.fetchRundowns().subscribe(rundowns => {
-      this.rundowns = rundowns
+    this.rundownService.fetchRundownIdentifiers().subscribe((rundownIdentifiers: Identifier[]) => {
+      this.rundownIdentifiers = rundownIdentifiers
     })
   }
 
-  navigateToRundown(rundown: Rundown): void {
-    this.router.navigate([Paths.RUNDOWNS, rundown.id])
+  navigateToRundown(rundownIdentifier: Identifier): void {
+    this.router.navigate([Paths.RUNDOWNS, rundownIdentifier.id])
   }
 }
