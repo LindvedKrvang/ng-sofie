@@ -13,11 +13,11 @@ export class AppComponent {
   constructor(private router: Router) {
   }
 
-  navigateHome(): void {
+  public navigateHome(): void {
     this.router.navigate([Paths.HOME])
   }
 
-  navigateToRundown(): void {
+  public navigateToRundown(): void {
     this.router.navigate([Paths.RUNDOWNS])
   }
 }

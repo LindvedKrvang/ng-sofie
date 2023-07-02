@@ -7,7 +7,7 @@ import { AdLibPieceService } from '../../services/ad-lib-piece.service'
   templateUrl: './ad-lib-piece-identifier.component.html',
   styleUrls: ['./ad-lib-piece-identifier.component.scss']
 })
-export class AdLibPieceIdentifierComponent implements OnInit {
+export class AdLibPieceIdentifierComponent {
 
   @Input()
   public rundownId: string
@@ -16,10 +16,7 @@ export class AdLibPieceIdentifierComponent implements OnInit {
 
   constructor(private adLibPieceService: AdLibPieceService) { }
 
-  ngOnInit(): void {
-  }
-
-  executeAdLibPiece(): void {
+  public executeAdLibPiece(): void {
     this.adLibPieceService.executeAdLibPiece(this.rundownId, this.adLibPieceIdentifier).subscribe()
   }
 }

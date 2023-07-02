@@ -11,14 +11,14 @@ export class AdLibPieceService {
 
   constructor(private http: HttpClient, private httpErrorService: HttpErrorService) { }
 
-  fetchAdLibPieceIdentifiers(rundownId: string): Observable<Identifier[]> {
+  public fetchAdLibPieceIdentifiers(rundownId: string): Observable<Identifier[]> {
     return this.http.get<Identifier[]>(`${AD_LIB_PIECE_URL}/${rundownId}/adLibPieces`)
       .pipe(
         catchError((error) => this.httpErrorService.catchError(error))
       )
   }
 
-  executeAdLibPiece(rundownId: string, adLibIdentifier: Identifier): Observable<void> {
+  public executeAdLibPiece(rundownId: string, adLibIdentifier: Identifier): Observable<void> {
     return this.http.put<void>(`${AD_LIB_PIECE_URL}/${rundownId}/adLibPieces/${adLibIdentifier.id}`, null)
       .pipe(
         catchError((error) => this.httpErrorService.catchError(error))

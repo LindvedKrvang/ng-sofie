@@ -26,23 +26,23 @@ export class Part {
     this.adLibPieces = []
   }
 
-  putOnAir(): void {
+  public putOnAir(): void {
     this.isOnAir = true
   }
 
-  takeOffAir(): void {
+  public takeOffAir(): void {
     this.isOnAir = false
   }
 
-  removeAsNextPart(): void {
+  public removeAsNextPart(): void {
     this.isNext = false
   }
 
-  setAsNextPart(): void {
+  public setAsNextPart(): void {
     this.isNext = true
   }
 
-  insetAdLibPiece(adLibPiece: AdLibPiece): void {
+  public insetAdLibPiece(adLibPiece: AdLibPiece): void {
     this.adLibPieces.push(adLibPiece)
   }
 }

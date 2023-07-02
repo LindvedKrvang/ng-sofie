@@ -6,14 +6,10 @@ import { Piece } from '../../../shared/model/piece'
   templateUrl: './piece.component.html',
   styleUrls: ['./piece.component.scss']
 })
-export class PieceComponent implements OnInit {
+export class PieceComponent {
 
   @Input()
   public piece: Piece
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

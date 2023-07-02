@@ -15,42 +15,42 @@ export class RundownService {
     private httpErrorService: HttpErrorService
   ) { }
 
-  fetchRundown(rundownId: string): Observable<Rundown> {
+  public fetchRundown(rundownId: string): Observable<Rundown> {
     return this.http.get<RundownInterface>(`${RUNDOWN_URL}/${rundownId}`).pipe(
       map((value: RundownInterface) => new Rundown(value)),
       catchError((error) => this.httpErrorService.catchError(error))
     )
   }
 
-  fetchRundownIdentifiers(): Observable<Identifier[]> {
+  public fetchRundownIdentifiers(): Observable<Identifier[]> {
     return this.http.get<Identifier[]>(`${RUNDOWN_URL}/identifiers`)
       .pipe(
         catchError((error) => this.httpErrorService.catchError(error))
       )
   }
 
-  activate(rundownId: string): Observable<void> {
+  public activate(rundownId: string): Observable<void> {
     return this.http.put<void>(`${RUNDOWN_URL}/${rundownId}/activate`, null)
       .pipe(
         catchError((error) => this.httpErrorService.catchError(error))
       )
   }
 
-  deactivate(rundownId: string): Observable<void> {
+  public deactivate(rundownId: string): Observable<void> {
     return this.http.put<void>(`${RUNDOWN_URL}/${rundownId}/deactivate`, null)
       .pipe(
         catchError((err) => this.httpErrorService.catchError(err))
       )
   }
 
-  takeNext(rundownId: string): Observable<void> {
+  public takeNext(rundownId: string): Observable<void> {
     return this.http.put<void>(`${RUNDOWN_URL}/${rundownId}/takeNext`, null)
       .pipe(
         catchError((error) => this.httpErrorService.catchError(error))
       )
   }
 
-  setNext(rundownId: string, segmentId: string, partId: string): Observable<void> {
+  public setNext(rundownId: string, segmentId: string, partId: string): Observable<void> {
     return this.http.put<void>(`${RUNDOWN_URL}/${rundownId}/segments/${segmentId}/parts/${partId}/setNext`, null)
       .pipe(
         catchError((error) => this.httpErrorService.catchError(error))

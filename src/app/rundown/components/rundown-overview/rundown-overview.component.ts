@@ -19,13 +19,13 @@ export class RundownOverviewComponent implements OnInit {
     private rundownService: RundownService
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.rundownService.fetchRundownIdentifiers().subscribe((rundownIdentifiers: Identifier[]) => {
       this.rundownIdentifiers = rundownIdentifiers
     })
   }
 
-  navigateToRundown(rundownIdentifier: Identifier): void {
+  public navigateToRundown(rundownIdentifier: Identifier): void {
     this.router.navigate([Paths.RUNDOWNS, rundownIdentifier.id])
   }
 }

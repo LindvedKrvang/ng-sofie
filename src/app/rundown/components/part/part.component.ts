@@ -6,7 +6,7 @@ import { Part } from '../../../shared/model/part'
   templateUrl: './part.component.html',
   styleUrls: ['./part.component.scss']
 })
-export class PartComponent implements OnInit {
+export class PartComponent {
 
   @Input()
   public isRundownActive: boolean
@@ -19,10 +19,7 @@ export class PartComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
-  setPartAsNext(): void {
+  public setPartAsNext(): void {
     this.partSelectedAsNextEvent.emit(this.part.id)
   }
 }

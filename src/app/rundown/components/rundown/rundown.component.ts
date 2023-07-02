@@ -32,7 +32,7 @@ export class RundownComponent implements OnInit, OnDestroy {
     private adLibPieceService: AdLibPieceService
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     const rundownId: string | null = this.route.snapshot.paramMap.get('rundownId')
     if (!rundownId) {
       console.log('No rundownId found. Can\'t fetch Rundown')

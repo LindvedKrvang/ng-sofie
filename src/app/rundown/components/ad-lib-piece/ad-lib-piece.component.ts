@@ -19,7 +19,7 @@ export class AdLibPieceComponent implements OnInit, OnDestroy {
 
   constructor(private changeDetector: ChangeDetectorRef) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.interval = setInterval(() => {
       const shouldBeShown: boolean = this.shouldBeShown()
       if (this.shouldShowPiece === shouldBeShown) {
@@ -34,13 +34,13 @@ export class AdLibPieceComponent implements OnInit, OnDestroy {
   }
 
 
-  shouldBeShown(): boolean {
+  public shouldBeShown(): boolean {
     const now: number = new Date().getTime()
     const pieceEnd: number = this.adLibPiece.start + this.adLibPiece.duration
     return this.adLibPiece.start <= now && pieceEnd >= now
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     clearInterval(this.interval)
   }
 }

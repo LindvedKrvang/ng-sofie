@@ -6,7 +6,7 @@ import { Segment } from '../../../shared/model/segment'
   templateUrl: './segment.component.html',
   styleUrls: ['./segment.component.scss']
 })
-export class SegmentComponent implements OnInit {
+export class SegmentComponent {
 
   @Input()
   public isRundownActive: boolean
@@ -19,10 +19,7 @@ export class SegmentComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
-  emitSetNextEvent(partId: string): void {
+  public emitSetNextEvent(partId: string): void {
     this.setNextEvent.emit({ segmentId: this.segment.id, partId})
   }
 }

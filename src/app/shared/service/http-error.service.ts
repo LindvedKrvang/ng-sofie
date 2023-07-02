@@ -8,7 +8,7 @@ export class HttpErrorService {
 
   constructor(private snackBar: MatSnackBar) { }
 
-  catchError(error: HttpErrorResponse): Observable<never> {
+  public catchError(error: HttpErrorResponse): Observable<never> {
     this.openSnackBarIfError(error)
     return EMPTY
   }

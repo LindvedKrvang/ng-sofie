@@ -5,7 +5,7 @@ const WEBSOCKET_URL: string = 'ws://localhost:3006/'
 @Injectable()
 export class RundownEventService {
 
-  listenForRundownEvents(rundownId: string, onEvent: (event: any) => void): WebSocket {
+  public listenForRundownEvents(rundownId: string, onEvent: (event: any) => void): WebSocket {
     const webSocket = new WebSocket(WEBSOCKET_URL)
     webSocket.onopen = (event) => {
       console.log(`Connected to Socket!`)
