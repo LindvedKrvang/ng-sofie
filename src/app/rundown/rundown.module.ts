@@ -13,6 +13,7 @@ import { PieceComponent } from './components/piece/piece.component'
 import { AdLibPieceComponent } from './components/ad-lib-piece/ad-lib-piece.component';
 import { AdLibPieceIdentifierComponent } from './components/ad-lib-piece-identifier/ad-lib-piece-identifier.component'
 import { AdLibPieceService } from './services/ad-lib-piece.service'
+import { SharedModule } from '../shared/shared.module'
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { AdLibPieceService } from './services/ad-lib-piece.service'
     CommonModule,
     MatGridListModule,
     MatCardModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    SharedModule
   ],
   providers: [
     RundownService,
