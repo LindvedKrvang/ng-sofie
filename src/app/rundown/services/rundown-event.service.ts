@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 const WEBSOCKET_URL: string = 'ws://localhost:3006/'
 
 @Injectable()
 export class RundownEventService {
+
+  constructor(private snackBar: MatSnackBar) {}
 
   public listenForRundownEvents(rundownId: string, onEvent: (event: any) => void): WebSocket {
     const webSocket = new WebSocket(WEBSOCKET_URL)
@@ -16,6 +19,7 @@ export class RundownEventService {
     webSocket.onerror = (event) => {
       console.log(`Error happened`)
       console.log(event)
+      this.showWebSocketErrorSnackBar('An error happened to the connection with the server. Please refresh the page.')
     }
 
     webSocket.onmessage = (event) => {
@@ -28,8 +32,20 @@ export class RundownEventService {
       // TODO: Setup 'framework' to reconnect if connection is lost
       console.log(`Socket closed`)
       console.log(event)
+      this.showWebSocketErrorSnackBar('Lost connection to server. Refresh the page to connect again.')
     }
 
     return webSocket
+  }
+
+  showWebSocketErrorSnackBar(message: string): void {
+    this.snackBar.open(
+      message,
+      '',
+      {
+        duration: undefined,
+        panelClass: 'snackbar-danger'
+      }
+    )
   }
 }
