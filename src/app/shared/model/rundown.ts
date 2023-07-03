@@ -40,6 +40,7 @@ export class Rundown {
   public deactivate(): void {
     this.isActive = false
     this.takeAllSegmentsOffAir()
+    this.infinitePieces = new Map()
   }
 
   private takeAllSegmentsOffAir(): void {
@@ -66,7 +67,7 @@ export class Rundown {
     this.infinitePieces.set(infinitePiece.layer, infinitePiece)
   }
 
-  public getInfinitePieceIdentifiers(): Piece[] {
+  public getInfinitePieces(): Piece[] {
     return Array.from(this.infinitePieces.values())
   }
 }
