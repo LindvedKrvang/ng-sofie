@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar'
-import {RundownEventServiceInterface} from './rundown-event-service-interface';
+import {RundownEventServiceInterface} from '../interfaces/rundown-event-service-interface';
 
 const WEBSOCKET_URL: string = 'ws://localhost:3006/'
 

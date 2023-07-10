@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http'
 import { catchError, map, Observable } from 'rxjs'
 import { Identifier } from '../model/identifier'
 import { HttpErrorService } from './http-error.service'
-import {RundownServiceInterface} from './rundown-service-interface';
+import {RundownServiceInterface} from '../interfaces/rundown-service-interface';
 
 const RUNDOWN_URL: string = 'http://localhost:3005/api/rundowns'
 

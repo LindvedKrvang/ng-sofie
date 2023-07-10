@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {RundownEventServiceInterface} from './rundown-event-service-interface';
+import {RundownEventServiceInterface} from '../../interfaces/rundown-event-service-interface';
 
 @Injectable()
 export class MockRundownEventService implements RundownEventServiceInterface {

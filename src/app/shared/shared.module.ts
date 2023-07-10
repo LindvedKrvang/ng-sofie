@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common'
 import { HttpErrorService } from './service/http-error.service'
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar'
 import {RundownService} from './service/rundown.service';
-import {MockRundownService} from './service/mock.rundown.service';
+import {MockRundownService} from './service/mocks/mock.rundown.service';
 import {RundownEventService} from './service/rundown-event.service';
-import {MockRundownEventService} from './service/mock.rundown-event.service';
-import {RundownEventServiceInterface} from './service/rundown-event-service-interface';
+import {MockRundownEventService} from './service/mocks/mock.rundown-event.service';
+import {RundownEventServiceInterface} from './interfaces/rundown-event-service-interface';
 
 const rundownEventService: RundownEventServiceInterface = new MockRundownEventService()
 
