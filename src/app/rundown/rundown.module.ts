@@ -5,7 +5,6 @@ import { MatCardModule } from '@angular/material/card'
 import { SegmentComponent } from './components/segment/segment.component'
 import { PartComponent } from './components/part/part.component'
 import { RundownComponent } from './components/rundown/rundown.component'
-import { RundownEventService } from './services/rundown-event.service'
 import { MatButtonToggleModule } from '@angular/material/button-toggle'
 import { PieceComponent } from './components/piece/piece.component'
 import { AdLibPieceComponent } from './components/ad-lib-piece/ad-lib-piece.component';
@@ -31,7 +30,6 @@ import { SharedModule } from '../shared/shared.module'
     SharedModule
   ],
   providers: [
-    RundownEventService,
     AdLibPieceService
   ]
 })

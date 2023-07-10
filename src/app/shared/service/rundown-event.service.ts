@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar'
+import {RundownEventServiceInterface} from './rundown-event-service-interface';
 
 const WEBSOCKET_URL: string = 'ws://localhost:3006/'
 
 @Injectable()
-export class RundownEventService {
+export class RundownEventService implements RundownEventServiceInterface {
 
   constructor(private snackBar: MatSnackBar) {}
 
@@ -38,7 +39,7 @@ export class RundownEventService {
     return webSocket
   }
 
-  showWebSocketErrorSnackBar(message: string): void {
+  private showWebSocketErrorSnackBar(message: string): void {
     this.snackBar.open(
       message,
       '',

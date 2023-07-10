@@ -1,11 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Rundown} from '../model/rundown';
 import {Piece} from '../model/piece';
-import {RundownService} from './rundown.service';
 import {Observable, of} from 'rxjs';
 import {Identifier} from '../model/identifier';
 import {Segment} from '../model/segment';
 import {Part} from '../model/part';
+import {RundownServiceInterface} from './rundown-service-interface';
+import {MockRundownEventService} from './mock.rundown-event.service';
+import {RundownEvent} from '../model/rundown-event';
+import {RundownEventType} from '../model/rundown-event-type';
 
 const RUNDOWNS: Rundown[] = [
   createRundown('R-1'),
@@ -63,16 +66,89 @@ function createPart(partId: string, segmentId: string): Part {
 }
 
 @Injectable()
-export class MockRundownService extends RundownService {
+export class MockRundownService implements RundownServiceInterface {
 
-  override fetchRundown(rundownId: string): Observable<Rundown> {
+  constructor(private eventService: MockRundownEventService) {
+  }
+
+  fetchRundown(rundownId: string): Observable<Rundown> {
     return of(RUNDOWNS.find(rundown => rundown.id === rundownId)!)
   }
 
-  override fetchRundownIdentifiers(): Observable<Identifier[]> {
+  fetchRundownIdentifiers(): Observable<Identifier[]> {
     return of(RUNDOWNS.map(rundown => ({
       id: rundown.id,
       name: rundown.name
     })));
+  }
+
+  activate(rundownId: string): Observable<void> {
+    const rundown: Rundown = RUNDOWNS.find(rundown => rundown.id === rundownId)!;
+    const firstSegment: Segment = rundown.segments[0];
+    const firstPart: Part = firstSegment.parts[0]
+    this.eventService.doMockEvent({
+      type: RundownEventType.ACTIVATE,
+      rundownId,
+      segmentId: firstSegment.id,
+      partId: firstPart.id
+    } as RundownEvent)
+
+    if (firstSegment.parts.length > 1) {
+      this.setNext(rundownId, firstSegment.id, firstSegment.parts[1].id)
+    } else {
+      this.setNext(rundownId, rundown.segments[1].id, rundown.segments[1].parts[0].id)
+    }
+
+    return of()
+  }
+
+  deactivate(rundownId: string): Observable<void> {
+    this.eventService.doMockEvent({
+      type: RundownEventType.DEACTIVATE,
+      rundownId
+    } as RundownEvent)
+    return of();
+  }
+
+  reset(rundownId: string): Observable<void> {
+    this.deactivate(rundownId)
+    this.activate(rundownId)
+    return of();
+  }
+
+  setNext(rundownId: string, segmentId: string, partId: string): Observable<void> {
+    this.eventService.doMockEvent({
+      type: RundownEventType.SET_NEXT,
+      rundownId,
+      segmentId,
+      partId
+    } as RundownEvent)
+    return of();
+  }
+
+  takeNext(rundownId: string): Observable<void> {
+    const rundown: Rundown = RUNDOWNS.find(rundown => rundown.id === rundownId)!;
+
+    const randomSegmentIndex: number = Math.floor(Math.random() * (rundown.segments.length - 1))
+    const segment: Segment = rundown.segments[randomSegmentIndex]
+
+    const randomPartIndex: number = Math.floor(Math.random() * (segment.parts.length - 1))
+    const part: Part = segment.parts[randomPartIndex]
+
+    this.eventService.doMockEvent({
+      type: RundownEventType.TAKE,
+      rundownId,
+      segmentId: segment.id,
+      partId: part.id
+    } as RundownEvent)
+
+    if (segment.parts.length > 1 && randomPartIndex < segment.parts.length - 1) {
+      const nextPartIndex: number = segment.parts.findIndex(part => part.id === part.id) + 1
+      this.setNext(rundownId, segment.id, segment.parts[nextPartIndex].id)
+    } else {
+      const nextSegmentIndex: number = rundown.segments.findIndex(s => s.id === segment.id) + 1
+      this.setNext(rundownId, rundown.segments[nextSegmentIndex].id, rundown.segments[nextSegmentIndex].parts[0].id)
+    }
+    return of();
   }
 }
