@@ -1,10 +1,27 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { Part } from '../../../shared/model/part'
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'sofie-part',
   templateUrl: './part.component.html',
-  styleUrls: ['./part.component.scss']
+  styleUrls: ['./part.component.scss'],
+  animations: [
+    trigger('onAirTrigger', [
+      state('onAir', style({
+        backgroundColor: 'red'
+      })),
+      state('offAir', style({
+
+      })),
+      state('isNext', style({
+        backgroundColor: 'green'
+      })),
+      transition('offAir => onAir', animate(500)),
+      transition('offAir => isNext', animate(500)),
+      transition('onAir => isNext', animate(500))
+    ]),
+  ]
 })
 export class PartComponent {
 

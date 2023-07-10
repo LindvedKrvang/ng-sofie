@@ -1,4 +1,7 @@
-<div class="part">
+<div
+  class="part"
+  [@onAirTrigger]="part.isOnAir ? 'onAir' : part.isNext ? 'isNext' : 'offAir'"
+>
   <span *ngIf="part.isOnAir" class="is-on-air">
     ON AIR
   </span>
