@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
-import { Rundown, RundownInterface } from '../../shared/model/rundown'
+import { Rundown, RundownInterface } from '../model/rundown'
 import { HttpClient } from '@angular/common/http'
 import { catchError, map, Observable } from 'rxjs'
-import { Identifier } from '../../shared/model/identifier'
-import { HttpErrorService } from '../../shared/service/http-error.service'
+import { Identifier } from '../model/identifier'
+import { HttpErrorService } from './http-error.service'
 
 const RUNDOWN_URL: string = 'http://localhost:3005/api/rundowns'
 

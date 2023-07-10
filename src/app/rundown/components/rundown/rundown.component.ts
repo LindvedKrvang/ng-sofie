@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Rundown } from '../../../shared/model/rundown'
 import { ActivatedRoute } from '@angular/router'
-import { RundownService } from '../../services/rundown.service'
+import { RundownService } from '../../../shared/service/rundown.service'
 import { RundownEventService } from '../../services/rundown-event.service'
 import {
   AdLibPieceInsertedRundownEvent, InfiniteRundownPieceAddedEvent,

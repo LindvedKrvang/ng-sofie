@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { HttpClientModule } from '@angular/common/http'
 import { RundownModule } from './rundown/rundown.module'
 import { SharedModule } from './shared/shared.module'
+import {RundownOverviewModule} from './rundown-overview/rundown-overview.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SharedModule } from './shared/shared.module'
     MatButtonModule,
     HttpClientModule,
     RundownModule,
+    RundownOverviewModule,
     SharedModule
   ],
   providers: [],

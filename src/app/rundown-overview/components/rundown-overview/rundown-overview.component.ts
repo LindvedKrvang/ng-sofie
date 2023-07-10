@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { RundownService } from '../../services/rundown.service'
+import { RundownService } from '../../../shared/service/rundown.service'
 import { Paths } from '../../../app-routing.module'
 import { Identifier } from '../../../shared/model/identifier'
 

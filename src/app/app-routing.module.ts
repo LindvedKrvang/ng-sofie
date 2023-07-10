@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { RundownOverviewComponent } from './rundown/components/rundown-overview/rundown-overview.component'
+import { RundownOverviewComponent } from './rundown-overview/components/rundown-overview/rundown-overview.component'
 import { RundownComponent } from './rundown/components/rundown/rundown.component'
 
 export enum Paths {

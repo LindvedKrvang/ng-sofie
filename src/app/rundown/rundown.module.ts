@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { RundownOverviewComponent } from './components/rundown-overview/rundown-overview.component'
-import { RundownService } from './services/rundown.service'
 import { MatGridListModule } from '@angular/material/grid-list'
 import { MatCardModule } from '@angular/material/card'
 import { SegmentComponent } from './components/segment/segment.component'
@@ -18,7 +16,6 @@ import { SharedModule } from '../shared/shared.module'
 
 @NgModule({
   declarations: [
-    RundownOverviewComponent,
     SegmentComponent,
     PartComponent,
     RundownComponent,
@@ -34,7 +31,6 @@ import { SharedModule } from '../shared/shared.module'
     SharedModule
   ],
   providers: [
-    RundownService,
     RundownEventService,
     AdLibPieceService
   ]
