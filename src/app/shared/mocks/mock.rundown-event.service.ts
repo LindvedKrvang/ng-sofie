@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {RundownEventServiceInterface} from '../../interfaces/rundown-event-service-interface';
+import {RundownEventServiceInterface} from '../interfaces/rundown-event-service-interface';
 
 @Injectable()
 export class MockRundownEventService implements RundownEventServiceInterface {
@@ -8,7 +8,10 @@ export class MockRundownEventService implements RundownEventServiceInterface {
 
   listenForRundownEvents(rundownId: string, onEvent: (event: any) => void): WebSocket {
     this.callback = onEvent
-    return {} as WebSocket
+    return {
+      close(code?: number, reason?: string) {
+      }
+    } as WebSocket
   }
 
   public doMockEvent(eventData: any): void {

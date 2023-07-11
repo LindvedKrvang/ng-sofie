@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core'
-import { Rundown, RundownInterface } from '../model/rundown'
-import { HttpClient } from '@angular/common/http'
-import { catchError, map, Observable } from 'rxjs'
-import { Identifier } from '../model/identifier'
-import { HttpErrorService } from './http-error.service'
+import {Injectable} from '@angular/core'
+import {Rundown, RundownInterface} from '../../shared/model/rundown'
+import {HttpClient} from '@angular/common/http'
+import {catchError, map, Observable} from 'rxjs'
+import {HttpErrorService} from '../../shared/service/http-error.service'
 import {RundownServiceInterface} from '../interfaces/rundown-service-interface';
 
 const RUNDOWN_URL: string = 'http://localhost:3005/api/rundowns'
@@ -21,13 +20,6 @@ export class RundownService implements RundownServiceInterface {
       map((value: RundownInterface) => new Rundown(value)),
       catchError((error) => this.httpErrorService.catchError(error))
     )
-  }
-
-  public fetchRundownIdentifiers(): Observable<Identifier[]> {
-    return this.http.get<Identifier[]>(`${RUNDOWN_URL}/identifiers`)
-      .pipe(
-        catchError((error) => this.httpErrorService.catchError(error))
-      )
   }
 
   public activate(rundownId: string): Observable<void> {

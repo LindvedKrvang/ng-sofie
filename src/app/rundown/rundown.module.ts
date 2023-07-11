@@ -11,6 +11,8 @@ import { AdLibPieceComponent } from './components/ad-lib-piece/ad-lib-piece.comp
 import { AdLibPieceIdentifierComponent } from './components/ad-lib-piece-identifier/ad-lib-piece-identifier.component'
 import { AdLibPieceService } from './services/ad-lib-piece.service'
 import { SharedModule } from '../shared/shared.module'
+import {RundownService} from './services/rundown.service';
+import {MockRundownService} from './mocks/mock.rundown.service';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { SharedModule } from '../shared/shared.module'
     SharedModule
   ],
   providers: [
-    AdLibPieceService
+    AdLibPieceService,
+    { provide: RundownService, useClass: MockRundownService }
   ]
 })
 export class RundownModule { }

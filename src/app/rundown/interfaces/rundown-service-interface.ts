@@ -1,12 +1,9 @@
 import {Observable} from 'rxjs';
-import {Rundown} from '../model/rundown';
-import {Identifier} from '../model/identifier';
+import {Rundown} from '../../shared/model/rundown';
 
 export interface RundownServiceInterface {
 
   fetchRundown(rundownId: string): Observable<Rundown>
-
-  fetchRundownIdentifiers(): Observable<Identifier[]>
 
   activate(rundownId: string): Observable<void>
 
