@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { Part } from '../../../shared/model/part'
+import { Part } from '../../../shared/models/part'
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { Segment } from '../../../shared/model/segment'
+import { Segment } from '../../../shared/models/segment'
 
 @Component({
   selector: 'sofie-segment',

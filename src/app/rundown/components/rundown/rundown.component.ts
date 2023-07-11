@@ -1,17 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
-import { Rundown } from '../../../shared/model/rundown'
-import { ActivatedRoute } from '@angular/router'
-import { RundownService } from '../../services/rundown.service'
-import { RundownEventService } from '../../../shared/service/rundown-event.service'
+import {Component, OnDestroy, OnInit} from '@angular/core'
+import {ActivatedRoute} from '@angular/router'
+import {RundownService} from '../../services/rundown.service'
+import {AdLibPieceService} from '../../services/ad-lib-piece.service'
+import {Rundown} from '../../../shared/models/rundown';
+import {Identifier} from '../../../shared/models/identifier';
+import {RundownEventService} from '../../../shared/services/rundown-event.service';
+import {RundownEventType} from '../../../shared/models/rundown-event-type';
 import {
-  AdLibPieceInsertedRundownEvent, InfiniteRundownPieceAddedEvent,
+  AdLibPieceInsertedRundownEvent,
+  InfiniteRundownPieceAddedEvent,
   RundownEvent
-} from '../../../shared/model/rundown-event'
-import { RundownEventType } from '../../../shared/model/rundown-event-type'
-import { Segment } from '../../../shared/model/segment'
-import { Part } from '../../../shared/model/part'
-import { Identifier } from '../../../shared/model/identifier'
-import { AdLibPieceService } from '../../services/ad-lib-piece.service'
+} from '../../../shared/models/rundown-event';
+import {Segment} from '../../../shared/models/segment';
+import {Part} from '../../../shared/models/part';
 
 @Component({
   selector: 'sofie-rundown',

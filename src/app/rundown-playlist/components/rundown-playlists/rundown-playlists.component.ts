@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core'
 import {ActivatedRoute, Router} from '@angular/router'
 import {Paths} from '../../../app-routing.module'
-import {Identifier} from '../../../shared/model/identifier'
+import {Identifier} from '../../../shared/models/identifier'
 import {RundownPlaylistService} from '../../services/rundown-playlist.service';
 
 @Component({

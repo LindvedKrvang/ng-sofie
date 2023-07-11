@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { Piece } from '../../../shared/model/piece'
+import { Piece } from '../../../shared/models/piece'
 
 @Component({
   selector: 'sofie-piece',

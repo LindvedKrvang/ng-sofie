@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core'
-import { AdLibPiece } from '../../../shared/model/ad-lib-piece'
+import { AdLibPiece } from '../../../shared/models/ad-lib-piece'
 
 const CHECK_SHOULD_BE_SHOWN_INTERVAL_IN_MS: number = 1000
 

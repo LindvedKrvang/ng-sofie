@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {HttpErrorService} from '../../shared/service/http-error.service';
+import {HttpErrorService} from '../../shared/services/http-error.service';
 import {catchError, Observable} from 'rxjs';
-import {Identifier} from '../../shared/model/identifier';
+import {Identifier} from '../../shared/models/identifier';
 import {RundownPlaylistServiceInterface} from '../interfaces/rundown-playlist-service-interface';
 
 // TODO: Change when we get RundownPlaylists endpoint

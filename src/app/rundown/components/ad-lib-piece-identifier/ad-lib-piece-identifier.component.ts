@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { Identifier } from '../../../shared/model/identifier'
-import { AdLibPieceService } from '../../services/ad-lib-piece.service'
+import {Component, Input} from '@angular/core'
+import {Identifier} from '../../../shared/models/identifier'
+import {AdLibPieceService} from '../../services/ad-lib-piece.service'
 
 @Component({
   selector: 'sofie-ad-lib-piece-identifier',
