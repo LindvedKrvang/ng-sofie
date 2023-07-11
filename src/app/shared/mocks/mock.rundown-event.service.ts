@@ -6,7 +6,7 @@ export class MockRundownEventService implements RundownEventServiceInterface {
 
   private callback: (event: any) => void
 
-  listenForRundownEvents(rundownId: string, onEvent: (event: any) => void): WebSocket {
+  public listenForRundownEvents(rundownId: string, onEvent: (event: any) => void): WebSocket {
     this.callback = onEvent
     return {
       close(code?: number, reason?: string) {
