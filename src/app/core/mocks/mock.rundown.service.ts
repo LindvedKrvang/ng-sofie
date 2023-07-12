@@ -68,6 +68,12 @@ function createPart(partId: string, segmentId: string): Part {
 @Injectable()
 export class MockRundownService implements RundownServiceInterface {
 
+  private currentSegment: Segment
+  private currentPart: Part
+
+  private nextSegment: Segment
+  private nextPart: Part
+
   constructor(private eventService: MockRundownEventService) {
   }
 
@@ -75,26 +81,19 @@ export class MockRundownService implements RundownServiceInterface {
     return of(RUNDOWNS.find(rundown => rundown.id === rundownId)!)
   }
 
-  public fetchRundownIdentifiers(): Observable<Identifier[]> {
-    return of(RUNDOWNS.map(rundown => ({
-      id: rundown.id,
-      name: rundown.name
-    })));
-  }
-
   public activate(rundownId: string): Observable<void> {
     const rundown: Rundown = RUNDOWNS.find(rundown => rundown.id === rundownId)!;
-    const firstSegment: Segment = rundown.segments[0];
-    const firstPart: Part = firstSegment.parts[0]
+    this.currentSegment = rundown.segments[0];
+    this.currentPart = this.currentSegment.parts[0]
     this.eventService.doMockEvent({
       type: RundownEventType.ACTIVATE,
       rundownId,
-      segmentId: firstSegment.id,
-      partId: firstPart.id
+      segmentId: this.currentSegment.id,
+      partId: this.currentPart.id
     } as RundownEvent)
 
-    if (firstSegment.parts.length > 1) {
-      this.setNext(rundownId, firstSegment.id, firstSegment.parts[1].id)
+    if (this.currentSegment.parts.length > 1) {
+      this.setNext(rundownId, this.currentSegment.id, this.currentSegment.parts[1].id)
     } else {
       this.setNext(rundownId, rundown.segments[1].id, rundown.segments[1].parts[0].id)
     }
@@ -117,6 +116,10 @@ export class MockRundownService implements RundownServiceInterface {
   }
 
   public setNext(rundownId: string, segmentId: string, partId: string): Observable<void> {
+    const rundown: Rundown = RUNDOWNS.find(rundown => rundown.id === rundownId)!;
+    this.nextSegment = rundown.segments.find(segment => segment.id === segmentId)!
+    this.nextPart = this.nextSegment.parts.find(part => part.id === partId)!
+
     this.eventService.doMockEvent({
       type: RundownEventType.SET_NEXT,
       rundownId,
@@ -129,26 +132,26 @@ export class MockRundownService implements RundownServiceInterface {
   public takeNext(rundownId: string): Observable<void> {
     const rundown: Rundown = RUNDOWNS.find(rundown => rundown.id === rundownId)!;
 
-    const randomSegmentIndex: number = Math.floor(Math.random() * (rundown.segments.length - 1))
-    const segment: Segment = rundown.segments[randomSegmentIndex]
-
-    const randomPartIndex: number = Math.floor(Math.random() * (segment.parts.length - 1))
-    const part: Part = segment.parts[randomPartIndex]
+    this.currentSegment = this.nextSegment
+    this.currentPart = this.nextPart
 
     this.eventService.doMockEvent({
       type: RundownEventType.TAKE,
       rundownId,
-      segmentId: segment.id,
-      partId: part.id
+      segmentId: this.currentSegment.id,
+      partId: this.currentPart.id
     } as RundownEvent)
 
-    if (segment.parts.length > 1 && randomPartIndex < segment.parts.length - 1) {
-      const nextPartIndex: number = segment.parts.findIndex(part => part.id === part.id) + 1
-      this.setNext(rundownId, segment.id, segment.parts[nextPartIndex].id)
-    } else {
-      const nextSegmentIndex: number = rundown.segments.findIndex(s => s.id === segment.id) + 1
+    const isLastPartInSegment: boolean = this.currentSegment.parts.findIndex(part => part.id === this.currentPart.id) === (this.currentSegment.parts.length - 1)
+
+    if (isLastPartInSegment) {
+      const nextSegmentIndex: number = rundown.segments.findIndex(s => s.id === this.currentSegment.id) + 1
       this.setNext(rundownId, rundown.segments[nextSegmentIndex].id, rundown.segments[nextSegmentIndex].parts[0].id)
+    } else {
+      const nextPartIndex: number = this.currentSegment.parts.findIndex(part => part.id === this.currentPart.id) + 1
+      this.setNext(rundownId, this.currentSegment.id, this.currentSegment.parts[nextPartIndex].id)
     }
+
     return of();
   }
 }
