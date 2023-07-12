@@ -12,6 +12,7 @@ import {RundownService} from './services/rundown.service';
 import {MockRundownService} from './mocks/mock.rundown.service';
 import {AdLibPieceService} from './services/ad-lib-piece.service';
 import {MockAdLibPieceService} from './mocks/mock.ad-lib-piece.service';
+import {MockDataService} from './mocks/mock.data.service';
 
 const rundownEventService: RundownEventServiceInterface = new MockRundownEventService()
 
@@ -27,7 +28,8 @@ const rundownEventService: RundownEventServiceInterface = new MockRundownEventSe
     { provide: MockRundownEventService, useValue: rundownEventService },
     { provide: RundownPlaylistService, useClass: MockRundownPlaylistService },
     { provide: RundownService, useClass: MockRundownService },
-    { provide: AdLibPieceService, useClass: MockAdLibPieceService }
+    { provide: AdLibPieceService, useClass: MockAdLibPieceService },
+    MockDataService
   ]
 })
 export class CoreModule extends EnsureLoadedOnceGuard {
