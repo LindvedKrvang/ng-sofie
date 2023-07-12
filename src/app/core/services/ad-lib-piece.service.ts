@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { catchError, Observable } from 'rxjs'
-import { Identifier } from '../../shared/models/identifier'
-import { HttpErrorService } from '../../shared/services/http-error.service'
+import { Identifier } from '../models/identifier'
+import { HttpErrorService } from './http-error.service'
 import {AdLibPieceServiceInterface} from '../interfaces/ad-lib-piece-service-interface';
 
 const AD_LIB_PIECE_URL: string = 'http://localhost:3005/api/adLibPieces'

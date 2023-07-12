@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {Identifier} from '../../shared/models/identifier';
-import {Segment} from '../../shared/models/segment';
-import {Part} from '../../shared/models/part';
+import {Identifier} from '../models/identifier';
+import {Segment} from '../models/segment';
+import {Part} from '../models/part';
 import {RundownServiceInterface} from '../interfaces/rundown-service-interface';
-import {MockRundownEventService} from '../../shared/mocks/mock.rundown-event.service';
-import {RundownEvent} from '../../shared/models/rundown-event';
-import {RundownEventType} from '../../shared/models/rundown-event-type';
-import {Rundown} from '../../shared/models/rundown';
-import {Piece} from '../../shared/models/piece';
+import {MockRundownEventService} from './mock.rundown-event.service';
+import {RundownEvent} from '../models/rundown-event';
+import {RundownEventType} from '../models/rundown-event-type';
+import {Rundown} from '../models/rundown';
+import {Piece} from '../models/piece';
 
 const RUNDOWNS: Rundown[] = [
   createRundown('R-1'),

@@ -3,32 +3,23 @@ import {BrowserModule} from '@angular/platform-browser'
 
 import {AppRoutingModule} from './app-routing.module'
 import {AppComponent} from './app.component'
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
-import {MatToolbarModule} from '@angular/material/toolbar'
-import {MatIconModule} from '@angular/material/icon'
-import {MatButtonModule} from '@angular/material/button'
-import {HttpClientModule} from '@angular/common/http'
-import {RundownModule} from './rundown/rundown.module'
-import {SharedModule} from './shared/shared.module'
-import {RundownPlaylistModule} from './rundown-playlist/rundown-playlist.module';
+import {CoreModule} from './core/core.module';
+import {SharedModule} from './shared/shared.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    HttpClientModule,
-    RundownPlaylistModule,
-    RundownModule,
+    AppRoutingModule,
+    CoreModule,
     SharedModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core'
 import {ActivatedRoute, Router} from '@angular/router'
 import {Paths} from '../../../app-routing.module'
-import {Identifier} from '../../../shared/models/identifier'
-import {RundownPlaylistService} from '../../services/rundown-playlist.service';
+import {Identifier} from '../../../core/models/identifier'
+import {RundownPlaylistService} from '../../../core/services/rundown-playlist.service';
 
 @Component({
   selector: 'sofie-rundown-playlists',

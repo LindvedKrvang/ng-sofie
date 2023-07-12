@@ -1,5 +1,5 @@
 import {Observable} from 'rxjs';
-import {Rundown} from '../../shared/models/rundown';
+import {Rundown} from '../models/rundown';
 
 export interface RundownServiceInterface {
 
